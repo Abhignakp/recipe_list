@@ -1,19 +1,22 @@
-const getElement = (selector) => {
-  const element = document.querySelector(selector)
+// Function to get an element and throw an error if not found
+const fetchElement = (selector) => {
+  const el = document.querySelector(selector);
+  if (!el) {
+    throw new Error(`No element found for the selector: ${selector}`);
+  }
+  return el;
+};
 
-  if (element) return element
-  throw Error(
-    `Please double check your class names, there is no ${selector} class`
-  )
-}
+// DOM elements
+const navLinks = fetchElement('.nav-links');
+const navButton = fetchElement('.nav-btn');
 
-const links = getElement('.nav-links')
-const navBtnDOM = getElement('.nav-btn')
+// Toggle visibility of links on button click
+navButton.addEventListener('click', () => {
+  navLinks.classList.toggle('show-links');
+});
 
-navBtnDOM.addEventListener('click', () => {
-  links.classList.toggle('show-links')
-})
+// Get the current year and update the date element
+const dateElement = fetchElement('#date');
+dateElement.textContent = new Date().getFullYear();
 
-const date = getElement('#date')
-const currentYear = new Date().getFullYear()
-date.textContent = currentYear
