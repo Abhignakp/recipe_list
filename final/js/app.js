@@ -1,19 +1,21 @@
-const getElement = (selector) => {
-  const element = document.querySelector(selector)
 
-  if (element) return element
-  throw Error(
-    `Please double check your class names, there is no ${selector} class`
-  )
-}
+const getElementBySelector = (selector) => {
+  const element = document.querySelector(selector);
+  if (!element) {
+    throw new Error(`No element found for selector: ${selector}`);
+  }
+  return element;
+};
 
-const links = getElement('.nav-links')
-const navBtnDOM = getElement('.nav-btn')
 
-navBtnDOM.addEventListener('click', () => {
-  links.classList.toggle('show-links')
-})
+const links = getElementBySelector('.nav-links');
+const navBtn = getElementBySelector('.nav-btn');
+const date = getElementBySelector('#date');
 
-const date = getElement('#date')
-const currentYear = new Date().getFullYear()
-date.textContent = currentYear
+
+navBtn.addEventListener('click', () => {
+  links.classList.toggle('show-links');
+});
+
+
+date.textContent = new Date().getFullYear();
